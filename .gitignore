@@ -1,0 +1,30 @@
+#####1.-Simulacion de series de tiempo#
+#####vamos a simular un indicador
+###para la simulacion necesitamos alguna informacion...
+####valor maximo, minimo, el numero de datos
+
+###en este ejemplo vamos a proponer la poblacion en mexico
+###que el valor minimo seran 100 max 120, 15datos que inicie en 200
+prob <- sample (100:120, 15, replace = F)
+###LA CONVERTIMOS EN SERIE DE TIEMPO
+probts <- ts (prob, frequency = 1, start = (2000))
+plot(probts)###darle formato
+plot(probts, main="poblacion", xlab="años", ylab="poblacion")###dar formato
+plot(aggregate(probts))
+######bajar de inegi la ocupacion de las personas
+####importar CSV
+ocu <- ts (read.csv(("C:\\Users\\SALA-C26\\Desktop\\IndicadoresENOE_2016-03-11.csv")), frequency = 4, start = 2005);
+plot(ocu)####darle formato
+plot(ocu, main="ocupacion", xlab= "años", ylab="porcentaje de poblacion ocupada")
+plot(aggregate(ocu))
+
+###simular desocupa 3 a 8, 40 datos trimestrales
+####bajar de inegi la verdadera tasa de desocupacion; importar a r
+###comparar simulada con inegi 
+desocupa <- sample(3:8, 40, replace = TRUE)
+desocuts<-ts (desocupa, frequency=4, start = (2005))
+
+###IMPORTANDO BASE INEGI
+desocup <- ts(read.csv(("C:\\Users\\SALA-C26\\Downloads\\DESOCUPACION.cvs"), header = F), frequency = 4, start = 2005);
+plot(desocup)
+plot(cbind(simulada, nosimulada), main="desocupacion simulada y no simulada ", xlab= "años")
